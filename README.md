@@ -1,8 +1,7 @@
-## **SFML + ImGui** CMake Template
-This is a template for creating a CMake project using SFML and ImGui.
+## Physics Simulation With C++ - SFML - ImGui
+This project is made for try to replicate physics with c++ and SFML.
 
-### Using
-Clone repository using this command:  
-```
-git clone https://github.com/Prevter/CMake_ImGui_SFML_Template.git --recursive .
-```
+### Functions Introduced:
+- Spawning of balls
+- Gravity (only of the earth at the moment)
+- Bouncing
