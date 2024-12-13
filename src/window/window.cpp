@@ -31,7 +31,7 @@ void Window::Run() {
 
         while (window.pollEvent(evnt)) {
             ImGui::SFML::ProcessEvent(evnt);
-
+            
             if (evnt.type == sf::Event::Closed) {
                 window.close();
                 open = false;
@@ -40,6 +40,9 @@ void Window::Run() {
                 ball.push_back(Ball(mousePos.x, mousePos.y));
                 canPress = false;
                 delayClock.restart();
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+                ball.clear();
             }
             if (!canPress && delayClock.getElapsedTime().asSeconds() >= delayTime) {
                 canPress = true;
