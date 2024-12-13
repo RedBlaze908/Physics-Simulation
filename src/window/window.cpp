@@ -19,6 +19,21 @@ void Window::Run() {
     bool canPress = true;
     const float delayTime = 0.2f;
 
+    //CHANGE IT PLEASE
+    sf::Font font;
+    font.loadFromFile("../../../font/OpenSans-Bold.ttf");
+    sf::Text t1, t2;
+    t2.setFont(font);
+    t2.setString("ALPHA VERSION 1.0.0");
+    t2.setCharacterSize(20);
+    t2.setFillColor(sf::Color::Red);
+    t2.setPosition(sf::Vector2f(window.getSize().x / 2, 10));
+    
+    t1.setFont(font);
+    t1.setString("R -> Remove All The Balls");
+    t1.setCharacterSize(20);
+    t1.setFillColor(sf::Color::White);
+    t1.setPosition(sf::Vector2f(window.getSize().x / 2, 40));
 
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_::ImGuiConfigFlags_DockingEnable;
@@ -51,9 +66,19 @@ void Window::Run() {
 
         sf::Time deltaTime = deltaClock.restart();
 
+        //CHANGE IT PLEASE
         ImGui::SFML::Update(window, deltaTime);
-        //ImGui::ShowDemoWindow();
+        ImGui::SetNextWindowSize(ImVec2(180, 100));
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+        if (ImGui::Begin("NULL", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse
+            | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar)) {
+
+            ImGui::SliderFloat("Gravity", &gravity, 1, 30);
+        }
+        ImGui::End();
         
+
+
         for (auto& c : ball) {
             if (c.isFalling()) c.fall(gravity);
             else c.bounce();
@@ -66,6 +91,8 @@ void Window::Run() {
         //Draw Stuff
         ImGui::SFML::Render(window);
         for (auto& c : ball) c.Draw(window);
+        window.draw(t1);
+        window.draw(t2);
         window.display();
     }
 
